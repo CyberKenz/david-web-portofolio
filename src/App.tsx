@@ -6,6 +6,7 @@ import { AboutSection } from './components/about/AboutSection';
 import { SpecialtiesSection } from './components/specialties/SpecialtiesSection';
 import { JourneyTimeline } from './components/journey/JourneyTimeline';
 import { CertificationSection } from './components/certification/CertificationSection';
+import { FAQSection } from './components/faq/FAQSection';
 import { GallerySection } from './components/gallery/GallerySection';
 import { ContactSection } from './components/contact/ContactSection';
 import { FloatingWhatsApp } from './components/common/FloatingWhatsApp';
@@ -39,6 +40,7 @@ export function App() {
           <WaveDivider from="bg-cream-deep" to="text-night" />
 
           <GallerySection />
+          <FAQSection />
           <ContactSection />
         </main>
 

@@ -132,10 +132,10 @@ export function ContactSection() {
           <div className="flex items-center gap-3">
             <span className="flex size-10 items-center justify-center overflow-hidden rounded-[10px] border-2 border-cream/40 bg-brand">
               <img
-                src="/daf_logo.png"
+                src="/daf_logo_small.png"
                 alt="David Andreas"
-                width={40}
-                height={40}
+                width={30}
+                height={30}
                 className="h-full w-full object-contain p-0.5"
               />
             </span>

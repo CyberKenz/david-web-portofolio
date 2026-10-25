@@ -103,7 +103,7 @@ function chatApiPlugin() {
               config: {
                 systemInstruction: CHATBOT_SYSTEM_PROMPT,
                 temperature: 0.7,
-                maxOutputTokens: 500,
+                maxOutputTokens: 1024,
               },
             };
 
@@ -137,6 +137,8 @@ function chatApiPlugin() {
               res.end(JSON.stringify({ error: 'Kuota API habis. Coba lagi nanti.' }));
             } else if (/network|ECONNREFUSED|fetch failed|ENOTFOUND/i.test(message)) {
               res.end(JSON.stringify({ error: 'Gagal terhubung ke server. Periksa koneksi internet Anda.' }));
+            } else if (/401|403|invalid.*api key|API key/i.test(message)) {
+              res.end(JSON.stringify({ error: 'Kunci API tidak valid. Hubungi administrator.' }));
             } else {
               res.end(JSON.stringify({ error: 'Terjadi kesalahan. Silakan coba lagi.' }));
             }

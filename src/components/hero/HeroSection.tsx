@@ -31,6 +31,9 @@ export function HeroSection() {
           <p className="mt-3 max-w-xl text-[14px] font-medium leading-6 text-night sm:text-[15px]" data-aos="fade-up" data-aos-delay="300" data-aos-duration="700" data-aos-once="true">
             {profileData.intro}
           </p>
+          <p className="mt-3 max-w-[40ch] text-[13px] font-medium leading-6 text-muted sm:text-[14px]" data-aos="fade-up" data-aos-delay="350" data-aos-duration="700" data-aos-once="true">
+            David Andreas adalah Personal Trainer di Elluna Gym &amp; MMA, Pontianak, Kalimantan Barat. Konsultasi latihan personal tersedia lewat WhatsApp, email, dan Instagram.
+          </p>
 
           <div className="mt-7 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center" data-aos="fade-up" data-aos-delay="400" data-aos-duration="700" data-aos-once="true">
             <a

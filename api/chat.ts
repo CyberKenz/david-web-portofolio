@@ -123,7 +123,7 @@ export default async function handler(req: Req, res: Res) {
         config: {
           systemInstruction: CHATBOT_SYSTEM_PROMPT,
           temperature: 0.7,
-          maxOutputTokens: 500,
+          maxOutputTokens: 1024,
         },
       };
       // Model flash sesekali 503 (high demand). Coba sekali lagi.
@@ -153,6 +153,8 @@ export default async function handler(req: Req, res: Res) {
       res.status(429).json({ error: 'Kuota API habis. Coba lagi nanti.' });
     } else if (/network|ECONNREFUSED|fetch failed|ENOTFOUND/i.test(message)) {
       res.status(503).json({ error: 'Gagal terhubung ke server. Periksa koneksi internet Anda.' });
+    } else if (/401|403|invalid.*api key|API key/i.test(message)) {
+      res.status(401).json({ error: 'Kunci API tidak valid. Hubungi administrator.' });
     } else {
       res.status(500).json({ error: 'Terjadi kesalahan. Silakan coba lagi.' });
     }

@@ -247,7 +247,7 @@ export const galleryData: GalleryItem[] = [
     id: 'david-suwardi',
     type: 'image',
     tag: 'Latihan',
-    caption: 'Latihan bersama',
+    caption: 'Mengajar klien',
     alt: 'David Andreas latihan bersama',
     image: {
       base: '/media/david_suwardi',
@@ -269,20 +269,6 @@ export const galleryData: GalleryItem[] = [
       width: 1200,
       height: 1800,
       alt: 'David Andreas sesi latihan'
-    }
-  },
-  {
-    id: 'strength-07',
-    type: 'video',
-    tag: 'Video',
-    caption: 'Sesi latihan',
-    alt: 'David Andreas mengajar gerakan latihan di Elluna Gym & MMA',
-    video: {
-      mp4: '/media/david_teaching_exercise.mp4',
-      webm: '/media/david_teaching_exercise.mp4',
-      poster: '/media/teaching-poster.webp',
-      width: 464,
-      height: 832
     }
   },
   {
@@ -311,6 +297,34 @@ export const galleryData: GalleryItem[] = [
       width: 1200,
       height: 1804,
       alt: 'David Andreas berlari dalam sebuah event lari'
+    }
+  },
+  {
+    id: 'doc-2026-10-21',
+    type: 'image',
+    tag: 'Dokumentasi',
+    caption: 'David Andreas',
+    alt: 'Foto dokumentasi proyek David, Oktober 2026',
+    image: {
+      base: '/media/david_doc_2026_10_21',
+      widths: [480, 800, 1200],
+      width: 3024,
+      height: 4032,
+      alt: 'Foto dokumentasi proyek David, Oktober 2026'
+    }
+  },
+  {
+    id: 'doc-2026-10-24',
+    type: 'video',
+    tag: 'Video',
+    caption: 'Sesi latihan',
+    alt: 'Video dokumentasi proyek David, Oktober 2026',
+    video: {
+      mp4: '/media/david_doc_2026_10_24.mp4',
+      webm: '/media/david_doc_2026_10_24.mp4',
+      poster: '/media/david_doc_2026_10_24-poster.webp',
+      width: 720,
+      height: 1280
     }
   }
 ];
