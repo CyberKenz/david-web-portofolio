@@ -8,7 +8,7 @@
  */
 
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { CHATBOT_SYSTEM_PROMPT } from '../src/data/david-knowledge.ts';
+import { CHATBOT_SYSTEM_PROMPT } from '../src/data/david-knowledge';
 
 const MODEL = 'gemini-3.5-flash';
 const RATE_LIMIT = 10;
