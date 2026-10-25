@@ -55,9 +55,15 @@ function readBody(req: Req): Promise<string> {
   });
 }
 
+function sendJson(res: Res, code: number, obj: unknown): void {
+  res.statusCode = code;
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.end(JSON.stringify(obj));
+}
+
 export default async function handler(req: Req, res: Res) {
   if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed' });
+    sendJson(res, 405, { error: 'Method not allowed' });
     return;
   }
 
@@ -68,7 +74,7 @@ export default async function handler(req: Req, res: Res) {
     'unknown';
 
   if (!checkRateLimit(ip)) {
-    res.status(429).json({ error: 'Terlalu banyak permintaan. Coba lagi dalam 1 menit.' });
+    sendJson(res, 429, { error: 'Terlalu banyak permintaan. Coba lagi dalam 1 menit.' });
     return;
   }
 
@@ -76,13 +82,13 @@ export default async function handler(req: Req, res: Res) {
   try {
     payload = JSON.parse((await readBody(req)) || '{}');
   } catch {
-    res.status(400).json({ error: 'Format permintaan tidak valid.' });
+    sendJson(res, 400, { error: 'Format permintaan tidak valid.' });
     return;
   }
 
   const rawMessages = payload.messages;
   if (!Array.isArray(rawMessages) || rawMessages.length === 0) {
-    res.status(400).json({ error: 'Pesan tidak valid.' });
+    sendJson(res, 400, { error: 'Pesan tidak valid.' });
     return;
   }
 
@@ -98,13 +104,13 @@ export default async function handler(req: Req, res: Res) {
     .filter((m) => m.parts[0].text.trim().length > 0);
 
   if (contents.length === 0) {
-    res.status(400).json({ error: 'Pesan tidak valid.' });
+    sendJson(res, 400, { error: 'Pesan tidak valid.' });
     return;
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    res.status(500).json({ error: 'Server belum dikonfigurasi. Hubungi administrator.' });
+    sendJson(res, 500, { error: 'Server belum dikonfigurasi. Hubungi administrator.' });
     return;
   }
 
@@ -150,13 +156,13 @@ export default async function handler(req: Req, res: Res) {
     console.error('Gemini API error:', error);
     const message = error instanceof Error ? error.message : String(error);
     if (/quota|429|RESOURCE_EXHAUSTED/i.test(message)) {
-      res.status(429).json({ error: 'Kuota API habis. Coba lagi nanti.' });
+      sendJson(res, 429, { error: 'Kuota API habis. Coba lagi nanti.' });
     } else if (/network|ECONNREFUSED|fetch failed|ENOTFOUND/i.test(message)) {
-      res.status(503).json({ error: 'Gagal terhubung ke server. Periksa koneksi internet Anda.' });
+      sendJson(res, 503, { error: 'Gagal terhubung ke server. Periksa koneksi internet Anda.' });
     } else if (/401|403|invalid.*api key|API key/i.test(message)) {
-      res.status(401).json({ error: 'Kunci API tidak valid. Hubungi administrator.' });
+      sendJson(res, 401, { error: 'Kunci API tidak valid. Hubungi administrator.' });
     } else {
-      res.status(500).json({ error: 'Terjadi kesalahan. Silakan coba lagi.' });
+      sendJson(res, 500, { error: 'Terjadi kesalahan. Silakan coba lagi.' });
     }
   }
 }
